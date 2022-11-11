@@ -9,13 +9,28 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../../domain/models/place.dart';
 
-class SearchResponse {
+abstract class SearchResponse {}
+
+class PickFromMapResponse extends SearchResponse {
+  final bool isOrigin;
+
+  PickFromMapResponse(this.isOrigin);
+}
+
+class OriginAndDestinationResponse extends SearchResponse {
   final Place origin, destination;
-  SearchResponse(this.origin, this.destination);
+  OriginAndDestinationResponse(this.origin, this.destination);
 }
 
 class SearchPlacePage extends StatelessWidget {
-  const SearchPlacePage({Key? key}) : super(key: key);
+  final Place? initialOrigin, initialDestination;
+  final bool hasOriginFocus;
+  const SearchPlacePage({
+    Key? key,
+    this.initialOrigin,
+    this.initialDestination,
+    required this.hasOriginFocus,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -24,19 +39,29 @@ class SearchPlacePage extends StatelessWidget {
         SearchRepositoryImpl(
           SearchApi(Dio()),
         ),
+        origin: initialOrigin,
+        destination: initialDestination,
+        hasOriginFocus: hasOriginFocus,
       ),
       child: Scaffold(
         backgroundColor: Colors.white,
-        appBar: const SearchAppBar(),
         body: GestureDetector(
           onTap: () => FocusScope.of(context).unfocus(),
-          child: SizedBox(
-            width: double.infinity,
-            height: double.infinity,
+          child: SafeArea(
             child: Column(
-              children: const [
-                SearchImputs(),
-                Expanded(
+              children: [
+                Stack(
+                  children: [
+                    Container(
+                      height: 55,
+                      width: double.infinity,
+                      color: Colors.white,
+                      child: const SearchAppBar(),
+                    ),
+                  ],
+                ),
+                const SearchImputs(),
+                const Expanded(
                   child: SearchResults(),
                 ),
               ],

@@ -6,7 +6,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 Future<BitmapDescriptor> getDotMarker() async {
   final recorder = ui.PictureRecorder();
   final canvas = ui.Canvas(recorder);
-  const size = ui.Size(30, 30);
+  const size = ui.Size(40, 40);
   final custonMarker = CircleMarker();
   custonMarker.paint(canvas, size);
   final picture = recorder.endRecording();

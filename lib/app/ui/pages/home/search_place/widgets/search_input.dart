@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:rive/rive.dart';
 
 class SearchInput extends StatefulWidget {
   final TextEditingController controllerorigin;
@@ -63,131 +62,183 @@ class _SearchInputState extends State<SearchInput> {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        Container(
-          width: double.infinity,
+        SizedBox(
           height: 140,
-          color: Colors.white,
-        ),
-        Positioned.fill(
-          top: 0,
-          bottom: 100,
-          left: 70,
-          right: 20,
-          child: Container(
-            decoration: const BoxDecoration(
-              color: Color(0xFFe6ebf1),
-              borderRadius: BorderRadius.all(
-                Radius.circular(30),
-              ),
-            ),
-          ),
-        ),
-        Positioned.fill(
-          top: 50,
-          bottom: 50,
-          left: 70,
-          right: 20,
-          child: CupertinoTextField(
-            padding: const EdgeInsets.only(left: 20.0, right: 10.0),
-            controller: widget.controllerorigin,
-            focusNode: widget.focusNodeorigin,
-            onChanged: (text) {
-              _textorigin.value = text;
-              widget.onChangedorigin(text);
-            },
-            placeholder: widget.placeholderorigin,
-            decoration: const BoxDecoration(
-              color: Color(0xFFe6ebf1),
-              borderRadius: BorderRadius.all(
-                Radius.circular(30),
-              ),
-            ),
-            suffix: ValueListenableBuilder<String>(
-              valueListenable: _textorigin,
-              builder: (_, text, child) {
-                if (text.isNotEmpty) {
-                  return child!;
-                }
-                return const SizedBox();
-              },
-              child: CupertinoButton(
-                padding: const EdgeInsets.all(10),
-                //color: Colors.black38,
-                alignment: Alignment.center,
-                child: const Icon(
-                  Icons.clear,
-                  color: Colors.black,
-                  size: 19,
+          width: double.infinity,
+          child: Row(
+            children: [
+              Expanded(
+                child: Container(
+                  color: Colors.white,
+                  child: Column(
+                    children: [
+                      const SizedBox(
+                        height: 64,
+                      ),
+                      Stack(
+                        children: [
+                          Container(
+                            height: 12,
+                            width: 12,
+                            decoration: BoxDecoration(
+                                color: Colors.black87,
+                                borderRadius: BorderRadius.circular(50)),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 14,
+                      ),
+                      Container(
+                        height: 9,
+                        width: 2,
+                        color: Colors.black87,
+                      ),
+                      const SizedBox(
+                        height: 14,
+                      ),
+                      Stack(
+                        children: [
+                          Container(
+                            height: 12,
+                            width: 12,
+                            decoration: BoxDecoration(
+                                color: Colors.black87,
+                                borderRadius: BorderRadius.circular(50)),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
-                onPressed: () {
-                  widget.controllerorigin.text = '';
-                  _textorigin.value = '';
-                  widget.onClearOrigin();
-                },
               ),
-            ),
-            style: const TextStyle(fontSize: 15),
-            cursorColor: Colors.black87,
-          ),
-        ),
-        Positioned.fill(
-          top: 100,
-          bottom: 0,
-          left: 70,
-          right: 20,
-          child: CupertinoTextField(
-            padding: const EdgeInsets.only(left: 20.0, right: 10.0),
-            controller: widget.controllerdestination,
-            focusNode: widget.focusNodedestination,
-            onChanged: (text) {
-              _textdestination.value = text;
-              widget.onChangeddestination(text);
-            },
-            placeholder: widget.placeholderdestination,
-            decoration: const BoxDecoration(
-              color: Color(0xFFe6ebf1),
-              borderRadius: BorderRadius.all(
-                Radius.circular(30),
-              ),
-            ),
-            suffix: ValueListenableBuilder<String>(
-              valueListenable: _textdestination,
-              builder: (_, text, child) {
-                if (text.isNotEmpty) {
-                  return child!;
-                }
-                return const SizedBox();
-              },
-              child: CupertinoButton(
-                padding: const EdgeInsets.all(10),
-                //color: Colors.black38,
-                alignment: Alignment.center,
-                child: const Icon(
-                  Icons.clear,
-                  color: Colors.black,
-                  size: 19,
+              Expanded(
+                flex: 5,
+                child: Container(
+                  color: Colors.white,
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(right: 20.0),
+                        child: Container(
+                          height: 40,
+                          width: double.infinity,
+                          color: Colors.white,
+                          child: Container(
+                            decoration: const BoxDecoration(
+                              color: Color(0xFFeeeeee),
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(10),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 10, right: 20.0),
+                        child: Container(
+                          height: 40,
+                          width: double.infinity,
+                          color: Colors.white,
+                          child: CupertinoTextField(
+                            padding:
+                                const EdgeInsets.only(left: 20.0, right: 10.0),
+                            controller: widget.controllerorigin,
+                            focusNode: widget.focusNodeorigin,
+                            onChanged: (text) {
+                              _textorigin.value = text;
+                              widget.onChangedorigin(text);
+                            },
+                            placeholder: widget.placeholderorigin,
+                            decoration: const BoxDecoration(
+                              color: Color(0xFFeeeeee),
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(10),
+                              ),
+                            ),
+                            suffix: ValueListenableBuilder<String>(
+                              valueListenable: _textorigin,
+                              builder: (_, text, child) {
+                                if (text.isNotEmpty) {
+                                  return child!;
+                                }
+                                return const SizedBox();
+                              },
+                              child: CupertinoButton(
+                                padding: const EdgeInsets.all(10),
+                                alignment: Alignment.center,
+                                child: const Icon(
+                                  Icons.clear,
+                                  color: Colors.black,
+                                  size: 19,
+                                ),
+                                onPressed: () {
+                                  widget.controllerorigin.text = '';
+                                  _textorigin.value = '';
+                                  widget.onClearOrigin();
+                                },
+                              ),
+                            ),
+                            style: const TextStyle(fontSize: 15),
+                            cursorColor: Colors.black87,
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 10, right: 20.0),
+                        child: Container(
+                          height: 40,
+                          width: double.infinity,
+                          color: Colors.white,
+                          child: CupertinoTextField(
+                            padding:
+                                const EdgeInsets.only(left: 20.0, right: 10.0),
+                            controller: widget.controllerdestination,
+                            focusNode: widget.focusNodedestination,
+                            onChanged: (text) {
+                              _textdestination.value = text;
+                              widget.onChangeddestination(text);
+                            },
+                            placeholder: widget.placeholderdestination,
+                            decoration: const BoxDecoration(
+                              color: Color(0xFFeeeeee),
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(10),
+                              ),
+                            ),
+                            suffix: ValueListenableBuilder<String>(
+                              valueListenable: _textdestination,
+                              builder: (_, text, child) {
+                                if (text.isNotEmpty) {
+                                  return child!;
+                                }
+                                return const SizedBox();
+                              },
+                              child: CupertinoButton(
+                                padding: const EdgeInsets.all(10),
+                                alignment: Alignment.center,
+                                child: const Icon(
+                                  Icons.clear,
+                                  color: Colors.black,
+                                  size: 19,
+                                ),
+                                onPressed: () {
+                                  widget.controllerdestination.text = '';
+                                  _textdestination.value = '';
+                                  widget.onClearDestination();
+                                },
+                              ),
+                            ),
+                            style: const TextStyle(fontSize: 15),
+                            cursorColor: Colors.black87,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-                onPressed: () {
-                  widget.controllerdestination.text = '';
-                  _textdestination.value = '';
-                  widget.onClearDestination();
-                },
               ),
-            ),
-            style: const TextStyle(fontSize: 15),
-            cursorColor: Colors.black87,
-          ),
-        ),
-        const Positioned.fill(
-          top: 65,
-          bottom: 15,
-          left: 20,
-          right: 340,
-          child: SizedBox(
-            child: RiveAnimation.asset(
-              'assets/animation_search.riv',
-              antialiasing: true,
-            ),
+            ],
           ),
         ),
       ],

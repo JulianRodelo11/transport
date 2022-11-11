@@ -4,57 +4,54 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class SearchAppBar extends StatelessWidget with PreferredSizeWidget {
+class SearchAppBar extends StatelessWidget {
   const SearchAppBar({
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return AppBar(
-      //systemOverlayStyle: ,
-      backgroundColor: Colors.white,
-      leading: Padding(
-        padding: const EdgeInsets.only(left: 10.0),
-        child: IconButton(
-          icon: const Icon(
-            Icons.arrow_back_rounded,
-            color: Colors.black,
-          ),
-          onPressed: () {
-            Navigator.pop(context);
-          },
+    return SafeArea(
+      child: Padding(
+        padding: const EdgeInsets.only(left: 20.0, right: 20.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            IconButton(
+              icon: const Icon(
+                CupertinoIcons.arrow_left,
+                color: Colors.black,
+              ),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+            Builder(
+              builder: (context) {
+                final controller = context.watch<SearchPlaceController>();
+                final origin = controller.origin;
+                final destination = controller.destination;
+                final bool enabled = origin != null && destination != null;
+
+                return CupertinoButton(
+                  child: const Text("Listo"),
+                  onPressed: enabled
+                      ? () {
+                          Navigator.pop(
+                            context,
+                            OriginAndDestinationResponse(origin, destination),
+                          );
+                        }
+                      : null,
+                );
+              },
+            ),
+          ],
         ),
       ),
-      actions: [
-        Padding(
-          padding: const EdgeInsets.only(right: 10),
-          child: Builder(
-            builder: (context) {
-              final controller = context.watch<SearchPlaceController>();
-              final origin = controller.origin;
-              final destination = controller.destination;
-              final bool enabled = origin != null && destination != null;
-
-              return CupertinoButton(
-                child: const Text("Listo"),
-                onPressed: enabled
-                    ? () {
-                        Navigator.pop(
-                          context,
-                          SearchResponse(origin, destination),
-                        );
-                      }
-                    : null,
-              );
-            },
-          ),
-        ),
-      ],
-      elevation: 0,
     );
   }
 
-  @override
-  Size get preferredSize => const Size.fromHeight(55);
+  // @override
+  // Size get preferredSize => const Size.fromHeight(55);
 }

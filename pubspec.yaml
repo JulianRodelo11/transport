@@ -30,7 +30,6 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.2
-  google_maps_flutter: ^2.2.1 
   provider: ^6.0.3
   permission_handler: ^8.2.5
   geolocator: ^7.1.1
@@ -39,10 +38,13 @@ dependencies:
   rive: ^0.9.1
   page_transition: ^2.0.9
   get: ^4.6.5
+  google_fonts: ^3.0.1
   flexible_polyline:
     git:
       url: https://github.com/heremaps/flexible-polyline.git
       path: dart
+  google_maps_flutter: ^2.2.1
+  
 
 dev_dependencies:
   flutter_test:

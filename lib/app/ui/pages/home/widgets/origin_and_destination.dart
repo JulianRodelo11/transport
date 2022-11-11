@@ -1,5 +1,5 @@
 import 'package:app_transport/app/ui/pages/home/controller/home_controller.dart';
-import 'package:app_transport/app/ui/pages/home/widgets/timeline_tile.dart';
+import 'package:app_transport/app/ui/pages/home/widgets/buttons/timeline_tile.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -17,7 +17,15 @@ class OriginAndDestination extends StatelessWidget {
     if (!originAndDestinationReady) {
       return Container();
     }
+    return const _View();
+  }
+}
 
+class _View extends StatelessWidget {
+  const _View({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
     final controller = Provider.of<HomeController>(
       context,
       listen: false,

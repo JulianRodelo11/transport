@@ -73,5 +73,6 @@ Future<HomeState> setRouteAndMarkers({
     destination: destination,
     markers: markersCopy,
     polylines: polylinesCopy,
+    fetching: false,
   );
 }

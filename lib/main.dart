@@ -8,8 +8,8 @@ void main() {
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
     systemNavigationBarColor: Colors.white, // Navigation bar
     systemNavigationBarIconBrightness: Brightness.dark,
-    statusBarColor: Colors.white, // Status bar
-    statusBarIconBrightness: Brightness.dark,
+    statusBarColor: Colors.black, // Status bar
+    statusBarIconBrightness: Brightness.light,
   ));
   runApp(const MyApp());
 }

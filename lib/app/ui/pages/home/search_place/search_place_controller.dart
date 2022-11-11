@@ -26,9 +26,31 @@ class SearchPlaceController extends ChangeNotifier {
   final originController = TextEditingController();
   final destinationController = TextEditingController();
 
-  bool _originHasFocus = true;
+  late bool _originHasFocus;
+  bool get originHasFocus => _originHasFocus;
 
-  SearchPlaceController(this._searchRepository) {
+  SearchPlaceController(
+    this._searchRepository, {
+    required Place? origin,
+    required Place? destination,
+    required bool hasOriginFocus,
+  }) {
+    _originHasFocus = hasOriginFocus;
+    _origin = origin;
+    _destination = destination;
+
+    if (_origin != null) {
+      originController.text = origin!.title;
+    }
+    if (_destination != null) {
+      destinationController.text = destination!.title;
+    }
+    if (hasOriginFocus) {
+      originfocusNode.requestFocus();
+    } else {
+      destinationfocusNode.requestFocus();
+    }
+
     _subscription = _searchRepository.onResults.listen(
       (results) {
         _places = results;

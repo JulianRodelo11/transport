@@ -73,9 +73,20 @@ class HomeController extends ChangeNotifier {
   void onMapCreated(GoogleMapController controller) {
     controller.setMapStyle(mapStyle);
     _mapController = controller;
+    final cameraUpdate = CameraUpdate.newLatLng(CurrentPosition.i.value!);
+    _mapController!.moveCamera(cameraUpdate);
   }
 
   void setOriginAndDestination(Place origin, Place destination) async {
+    if (_state.origin != null && _state.destination != null) {
+      clearData(true);
+    } else {
+      _state = _state.copyWhith(
+        fetching: true,
+      );
+      notifyListeners();
+    }
+
     final routes = await _routeRepository.get(
       origin: origin.position,
       destination: destination.position,
@@ -93,18 +104,61 @@ class HomeController extends ChangeNotifier {
         fitMap(
           origin.position,
           destination.position,
-          padding: 65,
+          padding: 70,
         ),
+      );
+      notifyListeners();
+    } else {
+      _state = _state.copyWhith(
+        fetching: false,
       );
       notifyListeners();
     }
   }
 
+  Future<void> exchange() async {
+    final origin = _state.destination!;
+    final destination = _state.origin!;
+    clearData();
+    return setOriginAndDestination(origin, destination);
+  }
+
   Future<void> turnOnGPS() => _geolocator.openLocationSettings();
 
-  void clearData() {
-    _state = _state.clrearOriginAndDestination();
+  Future<void> clearData([bool fetching = false]) async {
+    _state = _state.clrearOriginAndDestination(fetching);
     notifyListeners();
+    final zoom = await _mapController!.getZoomLevel();
+    final cameraUpdate = CameraUpdate.newLatLngZoom(
+      CurrentPosition.i.value!,
+      zoom < 15.4 ? 15.4 : zoom,
+    );
+    return _mapController!.animateCamera(cameraUpdate);
+  }
+
+  void pickFromMap(bool isOrigin) {
+    _state = _state.setPickFromMap(isOrigin);
+    notifyListeners();
+  }
+
+  Future<void> cancelPickFromMap() async {
+    _state = _state.cancelPickFromMap();
+    notifyListeners();
+    final zoom = await _mapController!.getZoomLevel();
+    final cameraUpdate = CameraUpdate.newLatLngZoom(
+      CurrentPosition.i.value!,
+      zoom < 15.4 ? 15.4 : zoom,
+    );
+    return _mapController!.animateCamera(cameraUpdate);
+  }
+
+  Future<void> goToMyPosition() async {
+    final zoom = await _mapController!.getZoomLevel();
+    final cameraUpdate = CameraUpdate.newLatLngZoom(
+      CurrentPosition.i.value!,
+      zoom < 15.4 ? 15.4 : zoom,
+    );
+    return _mapController!.animateCamera(cameraUpdate);
   }
 
   @override

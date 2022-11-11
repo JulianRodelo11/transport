@@ -33,7 +33,7 @@ const _mapStyle = [
     "featureType": "landscape.man_made",
     "elementType": "geometry.fill",
     "stylers": [
-      {"color": "#e7ecef"}
+      {"color": "#EDEDED"}
     ]
   },
   {
