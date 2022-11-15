@@ -4,25 +4,25 @@ import 'package:app_transport/app/domain/repositories/search_repository.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart' show LatLng;
 
 class SearchRepositoryImpl implements SearchRepository {
-  final SearchApi _searchApi;
+  final SearchAPI _searchAPI;
 
-  SearchRepositoryImpl(this._searchApi);
+  SearchRepositoryImpl(this._searchAPI);
 
   @override
   void search(String query, LatLng at) {
-    _searchApi.search(query, at);
+    _searchAPI.search(query, at);
   }
 
   @override
   void cancel() {
-    _searchApi.cancel();
+    _searchAPI.cancel();
   }
 
   @override
   void dispose() {
-    _searchApi.dispose();
+    _searchAPI.dispose();
   }
 
   @override
-  Stream<List<Place>?> get onResults => _searchApi.onResults;
+  Stream<List<Place>?> get onResults => _searchAPI.onResults;
 }

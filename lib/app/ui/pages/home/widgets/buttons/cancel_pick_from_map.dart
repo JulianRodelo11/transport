@@ -1,16 +1,17 @@
-import 'package:app_transport/app/ui/pages/home/controller/home_controller.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:app_transport/app/ui/pages/home/home_page.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_meedu/state.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
-class CancelPickFromMap extends StatelessWidget {
+class CancelPickFromMap extends ConsumerWidget {
   const CancelPickFromMap({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    final visible = context.select<HomeController, bool>(
-      (controller) => controller.state.pickFromMap != null,
+  Widget build(BuildContext context, ref) {
+    final visible = ref.select(
+      homeProvider.select((_) => _.pickFromMap != null),
     );
+
     if (!visible) {
       return Container();
     }
@@ -34,10 +35,9 @@ class CancelPickFromMap extends StatelessWidget {
             ],
           ),
           child: IconButton(
-            onPressed: context.read<HomeController>().cancelPickFromMap,
-            icon: const Icon(
-              CupertinoIcons.arrow_left,
-              color: Colors.black,
+            onPressed: homeProvider.read.cancelPickFromMap,
+            icon: SvgPicture.asset(
+              'assets/x.svg',
             ),
           ),
         ),

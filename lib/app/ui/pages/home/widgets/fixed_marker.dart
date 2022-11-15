@@ -1,15 +1,15 @@
-import 'package:app_transport/app/ui/pages/home/controller/home_controller.dart';
-import 'package:app_transport/app/ui/pages/home/controller/home_state.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_meedu/state.dart';
 
-class FixedMarker extends StatelessWidget {
+import '../home_page.dart' show homeProvider;
+
+class FixedMarker extends ConsumerWidget {
   const FixedMarker({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    final pickFromMap = context.select<HomeController, PickFromMap?>(
-      (controller) => controller.state.pickFromMap,
+  Widget build(BuildContext context, ref) {
+    final pickFromMap = ref.select(
+      homeProvider.select((_) => _.pickFromMap),
     );
 
     if (pickFromMap == null) {

@@ -1,7 +1,6 @@
-import 'package:app_transport/app/ui/pages/home/search_place/search_place_controller.dart';
+import 'package:app_transport/app/ui/pages/home/search_place/search_place_page.dart';
 import 'package:app_transport/app/ui/pages/home/search_place/widgets/search_input.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class SearchImputs extends StatelessWidget {
   const SearchImputs({
@@ -10,21 +9,22 @@ class SearchImputs extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller =
-        Provider.of<SearchPlaceController>(context, listen: false);
+    final controller = searchProvider.read;
     return Column(
       children: [
         SearchInput(
-          controllerorigin: controller.originController,
-          focusNodeorigin: controller.originfocusNode,
-          placeholderorigin: 'Origen',
-          onChangedorigin: controller.onQueryChange,
-          onClearOrigin: controller.clearQuery,
-          controllerdestination: controller.destinationController,
-          focusNodedestination: controller.destinationfocusNode,
-          placeholderdestination: 'Destino',
-          onChangeddestination: controller.onQueryChange,
-          onClearDestination: controller.clearQuery,
+          controller: controller.originController,
+          focusNode: controller.originFocusNode,
+          placeholder: 'Lugar de partida',
+          onChanged: controller.onQueryChanged,
+          onClear: controller.clearQuery,
+        ),
+        SearchInput(
+          controller: controller.destinationController,
+          focusNode: controller.destinationFocusNode,
+          placeholder: 'Lugar de llegada',
+          onChanged: controller.onQueryChanged,
+          onClear: controller.clearQuery,
         ),
       ],
     );

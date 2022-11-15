@@ -44,12 +44,19 @@ dependencies:
       url: https://github.com/heremaps/flexible-polyline.git
       path: dart
   google_maps_flutter: ^2.2.1
+  flutter_meedu: ^5.0.0
+  iconly: ^1.0.1
+  font_awesome_flutter: ^10.2.1
+  iconsax: ^0.0.8
   
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^1.0.3
+  build_runner: ^2.0.6
+  freezed_annotation: ^0.14.3
+  freezed: ^0.14.3
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -64,17 +71,15 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets/marcador.png
-    - assets/car_1.png
-    - assets/flechas.png
-    - assets/moto.png
-    - assets/star.png
-    - assets/home.png
-    - assets/history.png
-    - assets/acount.png
-    - assets/banner.png
-    - assets/animation_search.riv
     
+    - assets/car_1.png
+    - assets/moto.png
+    - assets/search-2.svg
+    - assets/step-search.svg
+    - assets/step-search2.svg
+    - assets/chevron-left.svg
+    - assets/x.svg
+    - assets/x-2.svg
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

@@ -1,22 +1,24 @@
-import 'package:app_transport/app/ui/pages/home/controller/home_controller.dart';
-import 'package:app_transport/app/ui/pages/home/controller/home_state.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_meedu/state.dart';
 
-class MapButtom extends StatelessWidget {
+import '../../home_page.dart' show homeProvider;
+
+class MapButtom extends ConsumerWidget {
   const MapButtom({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    final pickFromMap = context.select<HomeController, PickFromMap?>(
-      (controller) => controller.state.pickFromMap,
+  Widget build(BuildContext context, ref) {
+    final data = ref.select(
+      homeProvider.select((_) => _.pickFromMap),
     );
 
-    if (pickFromMap == null) {
+    final controller = homeProvider.read;
+
+    if (data == null) {
       return Container();
     }
     return Positioned(
-      bottom: 10,
+      top: 10,
       right: 10,
       child: SafeArea(
         child: Container(
@@ -35,7 +37,7 @@ class MapButtom extends StatelessWidget {
             ],
           ),
           child: IconButton(
-            onPressed: context.read<HomeController>().goToMyPosition,
+            onPressed: controller.goToMyPosition,
             icon: const Icon(
               Icons.gps_not_fixed_outlined,
               color: Colors.black,

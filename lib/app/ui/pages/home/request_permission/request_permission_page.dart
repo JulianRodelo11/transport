@@ -33,14 +33,14 @@ class _RequestPermissionPageState extends State<RequestPermissionPage>
               context: context,
               builder: (_) => AlertDialog(
                 title: const Text("INFO"),
-                content: const Text("sasaaa sasaaaaa"),
+                content: const Text("saas sasaas"),
                 actions: [
                   TextButton(
                     onPressed: () async {
                       Navigator.pop(context);
                       _fromSettings = await openAppSettings();
                     },
-                    child: const Text("Go to sentings"),
+                    child: const Text("Go to settings"),
                   ),
                   TextButton(
                     onPressed: () {
@@ -52,6 +52,7 @@ class _RequestPermissionPageState extends State<RequestPermissionPage>
               ),
             );
             break;
+          default:
         }
       },
     );

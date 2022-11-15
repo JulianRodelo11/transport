@@ -43,11 +43,9 @@ class TimeLineTile extends StatelessWidget {
     }
 
     return Positioned(
-      bottom: 10,
-      left: 65,
-      right: 65,
+      top: 70,
       child: Container(
-        width: double.infinity,
+        width: 245,
         height: 45,
         decoration: BoxDecoration(
           color: Colors.white,
@@ -65,11 +63,11 @@ class TimeLineTile extends StatelessWidget {
           children: [
             Flexible(
               child: GestureDetector(
-                onTap: () => goToSearch(context),
+                onTap: () => goToSearch(),
                 child: Padding(
                   padding: const EdgeInsets.only(left: 5.0),
                   child: Text(
-                    contentOrigin,
+                    titleOrigin,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: const TextStyle(
@@ -87,11 +85,11 @@ class TimeLineTile extends StatelessWidget {
             ),
             Flexible(
               child: GestureDetector(
-                onTap: () => goToSearch(context, false),
+                onTap: () => goToSearch(false),
                 child: Padding(
                   padding: const EdgeInsets.only(right: 5.0),
                   child: Text(
-                    contentDestination,
+                    titleDestination,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: const TextStyle(

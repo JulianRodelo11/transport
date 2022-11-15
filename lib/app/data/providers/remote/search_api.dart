@@ -5,10 +5,10 @@ import 'package:dio/dio.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart' show LatLng;
 import '../../../domain/models/place.dart';
 
-class SearchApi {
+class SearchAPI {
   final Dio _dio;
 
-  SearchApi(this._dio);
+  SearchAPI(this._dio);
   CancelToken? _cancelToken;
   final _controller = StreamController<List<Place>?>.broadcast();
   Stream<List<Place>?> get onResults => _controller.stream;

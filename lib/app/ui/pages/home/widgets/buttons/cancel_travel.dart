@@ -1,20 +1,20 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_meedu/state.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import '../../home_page.dart' show homeProvider;
 
-import '../../controller/home_controller.dart';
-
-class CancelTravel extends StatelessWidget {
+class CancelTravel extends ConsumerWidget {
   const CancelTravel({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    final originAndDestinationReady =
-        context.select<HomeController, bool>((controller) {
-      final state = controller.state;
-      return state.origin != null && state.destination != null;
-    });
-    if (!originAndDestinationReady) {
+  Widget build(BuildContext context, ref) {
+    // only build if the origin and destination have changed
+    final controller = ref.watch(
+      homeProvider.select((state) {
+        return state.origin != null && state.destination != null;
+      }),
+    );
+    if (!controller.originAndDestinationReady) {
       return Container();
     }
     return Positioned(
@@ -37,10 +37,9 @@ class CancelTravel extends StatelessWidget {
             ],
           ),
           child: IconButton(
-            onPressed: context.read<HomeController>().clearData,
-            icon: const Icon(
-              CupertinoIcons.arrow_left,
-              color: Colors.black,
+            onPressed: homeProvider.read.clearData,
+            icon: SvgPicture.asset(
+              'assets/x.svg',
             ),
           ),
         ),

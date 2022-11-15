@@ -1,13 +1,25 @@
 import 'dart:async';
-
 import 'package:app_transport/app/domain/models/place.dart';
 import 'package:app_transport/app/domain/repositories/search_repository.dart';
 import 'package:app_transport/app/helpers/current_position.dart';
-import 'package:flutter/widgets.dart'
-    show ChangeNotifier, FocusNode, TextEditingController;
+import 'package:flutter/widgets.dart' show FocusNode, TextEditingController;
+import 'package:flutter_meedu/meedu.dart';
+import 'package:flutter_meedu/flutter_meedu.dart';
 
-class SearchPlaceController extends ChangeNotifier {
-  final SearchRepository _searchRepository;
+class SearchPlaceArguments {
+  final Place? initialOrigin, initialDestination;
+  final bool hasOriginFocus;
+
+  SearchPlaceArguments({
+    this.initialOrigin,
+    this.initialDestination,
+    required this.hasOriginFocus,
+  });
+}
+
+class SearchPlaceController extends SimpleNotifier {
+  final SearchRepository _searchRepository = Get.i.find<SearchRepository>();
+
   String _query = '';
   String get query => _query;
 
@@ -17,11 +29,12 @@ class SearchPlaceController extends ChangeNotifier {
   List<Place>? get places => _places;
 
   Place? _origin, _destination;
+
   Place? get origin => _origin;
   Place? get destination => _destination;
 
-  final originfocusNode = FocusNode();
-  final destinationfocusNode = FocusNode();
+  final originFocusNode = FocusNode();
+  final destinationFocusNode = FocusNode();
 
   final originController = TextEditingController();
   final destinationController = TextEditingController();
@@ -29,46 +42,39 @@ class SearchPlaceController extends ChangeNotifier {
   late bool _originHasFocus;
   bool get originHasFocus => _originHasFocus;
 
-  SearchPlaceController(
-    this._searchRepository, {
-    required Place? origin,
-    required Place? destination,
-    required bool hasOriginFocus,
-  }) {
-    _originHasFocus = hasOriginFocus;
-    _origin = origin;
-    _destination = destination;
+  SearchPlaceController(SearchPlaceArguments arguments) {
+    _originHasFocus = arguments.hasOriginFocus;
+
+    _origin = arguments.initialOrigin;
+    _destination = arguments.initialDestination;
 
     if (_origin != null) {
-      originController.text = origin!.title;
+      originController.text = _origin!.title;
     }
+
     if (_destination != null) {
-      destinationController.text = destination!.title;
-    }
-    if (hasOriginFocus) {
-      originfocusNode.requestFocus();
-    } else {
-      destinationfocusNode.requestFocus();
+      destinationController.text = _destination!.title;
     }
 
     _subscription = _searchRepository.onResults.listen(
       (results) {
         _places = results;
-        notifyListeners();
+        notify();
       },
     );
 
-    originfocusNode.addListener(() {
-      if (originfocusNode.hasFocus && !_originHasFocus) {
-        _onoriginFocusNodeChanged(true);
-      } else if (!originfocusNode.hasFocus && _origin == null) {
+    originFocusNode.addListener(() {
+      if (originFocusNode.hasFocus && !_originHasFocus) {
+        _onOriginFocusNodeChanged(true);
+      } else if (!originFocusNode.hasFocus && _origin == null) {
         originController.text = '';
       }
     });
-    destinationfocusNode.addListener(() {
-      if (destinationfocusNode.hasFocus && _originHasFocus) {
-        _onoriginFocusNodeChanged(false);
-      } else if (!destinationfocusNode.hasFocus && _destination == null) {
+
+    destinationFocusNode.addListener(() {
+      if (destinationFocusNode.hasFocus && _originHasFocus) {
+        _onOriginFocusNodeChanged(false);
+      } else if (!destinationFocusNode.hasFocus && _destination == null) {
         destinationController.text = '';
       }
     });
@@ -76,26 +82,36 @@ class SearchPlaceController extends ChangeNotifier {
 
   Timer? _debouncer;
 
-  void _onoriginFocusNodeChanged(bool hasFocus) {
+  void _onOriginFocusNodeChanged(bool hasFocus) {
     _originHasFocus = hasFocus;
     _places = [];
     _query = '';
-    notifyListeners();
+    notify();
   }
 
-  void onQueryChange(String text) {
+  void setInitialFocus() {
+    if (_originHasFocus) {
+      originFocusNode.requestFocus();
+    } else {
+      destinationFocusNode.requestFocus();
+    }
+  }
+
+  void onQueryChanged(String text) {
     _query = text;
     _debouncer?.cancel();
     _debouncer = Timer(
-      const Duration(milliseconds: 200),
+      const Duration(milliseconds: 500),
       () {
         if (_query.length >= 3) {
+          // print("🎃 Call to API $query");
           final currentPosition = CurrentPosition.i.value;
           if (currentPosition != null) {
             _searchRepository.cancel();
             _searchRepository.search(query, currentPosition);
           }
         } else {
+          // print("🎃 cancel API call");
           clearQuery();
         }
       },
@@ -110,7 +126,7 @@ class SearchPlaceController extends ChangeNotifier {
     } else {
       _destination = null;
     }
-    notifyListeners();
+    notify();
   }
 
   void pickPlace(Place place) {
@@ -121,18 +137,19 @@ class SearchPlaceController extends ChangeNotifier {
       _destination = place;
       destinationController.text = place.title;
     }
-    notifyListeners();
+    notify();
   }
 
   @override
   void dispose() {
     originController.dispose();
     destinationController.dispose();
-    originfocusNode.dispose();
-    destinationfocusNode.dispose();
+    originFocusNode.dispose();
+    destinationFocusNode.dispose();
     _debouncer?.cancel();
     _subscription.cancel();
     _searchRepository.dispose();
+    Get.i.remove<SearchRepository>();
     super.dispose();
   }
 }

@@ -4,10 +4,10 @@ import 'package:dio/dio.dart';
 import 'package:flexible_polyline/flexible_polyline.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart' show LatLng;
 
-class RoutesApi {
+class RoutesAPI {
   final Dio _dio;
 
-  RoutesApi(this._dio);
+  RoutesAPI(this._dio);
 
   Future<List<Route>?> get({
     required LatLng origin,

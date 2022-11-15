@@ -12,7 +12,7 @@ const Color kBlue = Color(0xff5474FD);
 const Color kLightBlue = Color(0xff83B1FF);
 const Color kLighterBlue = Color(0xffC1D4F9);
 
-const Color kBlack = Colors.black;
+const Color kBlack = Colors.black87;
 
 const double kBorderRadius = 16.0;
 

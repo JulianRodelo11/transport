@@ -1,63 +1,27 @@
 import 'package:app_transport/app/domain/models/place.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+part 'home_state.freezed.dart';
 
-class HomeState {
-  final bool loading, gpsEnabled, fetching;
-  final Map<MarkerId, Marker> markers;
-  final Map<PolylineId, Polyline> polylines;
-  final LatLng? initialPosition;
-  final Place? origin, destination;
-  final PickFromMap? pickFromMap;
+@freezed
+class HomeState with _$HomeState {
+  const HomeState._();
 
-  HomeState({
-    required this.loading,
-    required this.gpsEnabled,
-    required this.markers,
-    required this.polylines,
-    required this.initialPosition,
-    required this.origin,
-    required this.destination,
-    required this.fetching,
-    required this.pickFromMap,
-  });
-
-  static HomeState get initialState => HomeState(
-        loading: true,
-        gpsEnabled: false,
-        markers: {},
-        polylines: {},
-        initialPosition: null,
-        origin: null,
-        destination: null,
-        fetching: false,
-        pickFromMap: null,
-      );
-
-  HomeState copyWhith({
-    bool? loading,
-    bool? gpsEnabled,
-    bool? fetching,
-    Map<MarkerId, Marker>? markers,
-    Map<PolylineId, Polyline>? polylines,
+  const factory HomeState({
+    @Default(true) bool loading,
+    @Default(false) bool gpsEnabled,
+    @Default(false) bool fetching,
+    @Default({}) Map<MarkerId, Marker> markers,
+    @Default({}) Map<PolylineId, Polyline> polylines,
     LatLng? initialPosition,
     Place? origin,
     Place? destination,
     PickFromMap? pickFromMap,
-  }) {
-    return HomeState(
-      pickFromMap: pickFromMap ?? this.pickFromMap,
-      fetching: fetching ?? this.fetching,
-      loading: loading ?? this.loading,
-      gpsEnabled: gpsEnabled ?? this.gpsEnabled,
-      markers: markers ?? this.markers,
-      polylines: polylines ?? this.polylines,
-      initialPosition: initialPosition ?? this.initialPosition,
-      origin: origin ?? this.origin,
-      destination: destination ?? this.destination,
-    );
-  }
+  }) = _HomeState;
 
-  HomeState clrearOriginAndDestination(bool fetching) {
+  static HomeState get initialState => const HomeState();
+
+  HomeState clearOriginAndDestination(bool fetching) {
     return HomeState(
       pickFromMap: null,
       fetching: fetching,
@@ -68,6 +32,28 @@ class HomeState {
       initialPosition: initialPosition,
       origin: null,
       destination: null,
+    );
+  }
+
+  HomeState setPickFromMap(bool isOrigin) {
+    return HomeState(
+      pickFromMap: PickFromMap(
+        place: null,
+        isOrigin: isOrigin,
+        origin: origin,
+        destination: destination,
+        markers: markers,
+        polylines: polylines,
+        dragging: false,
+      ),
+      markers: {},
+      polylines: {},
+      origin: null,
+      destination: null,
+      loading: loading,
+      fetching: fetching,
+      gpsEnabled: gpsEnabled,
+      initialPosition: initialPosition,
     );
   }
 
@@ -86,40 +72,33 @@ class HomeState {
     );
   }
 
-  HomeState setPickFromMap(bool isOrigin) {
+  HomeState confirmOriginOrDestination() {
+    final data = pickFromMap!;
+
     return HomeState(
-      pickFromMap: PickFromMap(
-        isOrigin,
-        place: null,
-        origin: origin,
-        destination: destination,
-        markers: markers,
-        polylines: polylines,
-      ),
-      markers: {},
-      polylines: {},
-      origin: null,
-      destination: null,
       loading: loading,
-      fetching: fetching,
       gpsEnabled: gpsEnabled,
+      markers: markers,
+      polylines: polylines,
       initialPosition: initialPosition,
+      origin: data.isOrigin ? data.place : data.origin,
+      destination: !data.isOrigin ? data.place : data.destination,
+      fetching: fetching,
+      pickFromMap: null,
     );
   }
 }
 
-class PickFromMap {
-  final Place? place, origin, destination;
-  final bool isOrigin;
-  final Map<MarkerId, Marker> markers;
-  final Map<PolylineId, Polyline> polylines;
-
-  PickFromMap(
-    this.isOrigin, {
-    required this.place,
-    required this.origin,
-    required this.destination,
-    required this.markers,
-    required this.polylines,
-  });
+@freezed
+class PickFromMap with _$PickFromMap {
+  const PickFromMap._();
+  const factory PickFromMap({
+    Place? place,
+    Place? origin,
+    Place? destination,
+    required bool isOrigin,
+    required bool dragging,
+    required Map<MarkerId, Marker> markers,
+    required Map<PolylineId, Polyline> polylines,
+  }) = _PickFromMap;
 }

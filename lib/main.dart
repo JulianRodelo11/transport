@@ -1,30 +1,39 @@
-import 'package:app_transport/app/ui/routes/pages.dart';
-import 'package:app_transport/app/ui/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:get/get.dart';
+import 'app/inject_dependencies.dart';
+import 'package:app_transport/app/ui/routes/pages.dart';
+import 'package:app_transport/app/ui/routes/routes.dart';
+import 'package:flutter_meedu/router.dart' as router;
 
 void main() {
+  injectDependencies();
+  router.setDefaultTransition(router.Transition.fadeIn);
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
     systemNavigationBarColor: Colors.white, // Navigation bar
     systemNavigationBarIconBrightness: Brightness.dark,
-    statusBarColor: Colors.black, // Status bar
-    statusBarIconBrightness: Brightness.light,
+    statusBarColor: Colors.white, // Status bar
+    statusBarIconBrightness: Brightness.dark,
   ));
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
+// ignore: use_key_in_widget_constructors
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
+    return MaterialApp(
       title: 'Flutter Demo',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
       debugShowCheckedModeBanner: false,
       initialRoute: Routes.SPLASH,
-      routes: appRoutes(),
+      navigatorKey: router.navigatorKey,
+      navigatorObservers: [
+        router.observer,
+      ],
+      routes: appRoutes,
     );
   }
 }

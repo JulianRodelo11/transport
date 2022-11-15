@@ -1,22 +1,25 @@
-import 'package:app_transport/app/ui/pages/home/search_place/search_place_controller.dart';
+import 'package:app_transport/app/ui/pages/home/search_place/page_view_search.dart';
+import 'package:app_transport/app/ui/pages/home/search_place/search_place_page.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_meedu/state.dart';
 
-import '../page_view_search.dart';
-
-class SearchResults extends StatelessWidget {
+class SearchResults extends ConsumerWidget {
   const SearchResults({Key? key}) : super(key: key);
-
   @override
-  Widget build(BuildContext context) {
-    final controller = context.watch<SearchPlaceController>();
+  Widget build(BuildContext context, ref) {
+    final controller = ref.watch(searchProvider);
     final places = controller.places;
+    final origin = controller.origin;
+    final destination = controller.destination;
+    final bool enabled = origin != null && destination != null;
     if (places == null) {
       return const Center(
         child: Text("Error"),
       );
     } else if (places.isEmpty) {
       return const PageViewSearch();
+    } else if (enabled) {
+      return Container();
     }
     return ListView.builder(
       itemBuilder: (_, index) {
@@ -24,18 +27,13 @@ class SearchResults extends StatelessWidget {
         return Padding(
           padding: const EdgeInsets.only(top: 10),
           child: ListTile(
-            /*leading: Text(
-                                distanceFormat(place.distance),
-                              ),*/
             title: Text(
               place.title,
-              //style: TextStyle(fontSize: 1),
             ),
             onTap: () {
               FocusScope.of(context).unfocus();
               controller.pickPlace(place);
             },
-            //subtitle: Text(place.address),
           ),
         );
       },

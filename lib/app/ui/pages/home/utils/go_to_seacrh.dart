@@ -1,33 +1,27 @@
-import 'package:flutter/material.dart'
-    show BuildContext, MaterialPageRoute, Navigator, WidgetsBinding;
-import 'package:provider/provider.dart';
+import 'package:app_transport/app/ui/pages/home/home_page.dart';
+import 'package:flutter/material.dart' show WidgetsBinding;
 
-import '../controller/home_controller.dart';
+import '../search_place/search_place_controller.dart';
 import '../search_place/search_place_page.dart';
+import 'package:flutter_meedu/router.dart' as router;
 
-void goToSearch(BuildContext context, [bool hasOriginFocus = true]) async {
-  final controller = Provider.of<HomeController>(
-    context,
-    listen: false,
-  );
-
+void goToSearch([bool hasOriginFocus = true]) async {
+  final controller = homeProvider.read;
   final state = controller.state;
 
-  final route = MaterialPageRoute<SearchResponse>(
-    builder: (_) => SearchPlacePage(
+  final response = await router.push<SearchResponse>(
+    const SearchPlacePage(),
+    transition: router.Transition.rightToLeft,
+    transitionDuration: const Duration(milliseconds: 300),
+    arguments: SearchPlaceArguments(
       initialOrigin: state.origin,
       initialDestination: state.destination,
       hasOriginFocus: hasOriginFocus,
     ),
   );
-  final response = await Navigator.push<SearchResponse>(
-    context,
-    route,
-  );
   if (response != null) {
     WidgetsBinding.instance.addPostFrameCallback(
       (_) {
-        final controller = context.read<HomeController>();
         if (response is OriginAndDestinationResponse) {
           controller.setOriginAndDestination(
             response.origin,

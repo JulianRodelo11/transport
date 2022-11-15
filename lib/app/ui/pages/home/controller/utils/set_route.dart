@@ -68,7 +68,7 @@ Future<HomeState> setRouteAndMarkers({
 
   polylinesCopy[polylineId] = polyline;
 
-  return state.copyWhith(
+  return state.copyWith(
     origin: origin,
     destination: destination,
     markers: markersCopy,

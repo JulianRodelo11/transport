@@ -1,15 +1,13 @@
-import 'package:app_transport/app/ui/pages/home/search_place/search_place_controller.dart';
 import 'package:app_transport/app/ui/pages/home/search_place/search_place_page.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_meedu/state.dart';
 
-class PickFromMapButtom extends StatelessWidget {
-  const PickFromMapButtom({Key? key}) : super(key: key);
-
+class PickFromMapButton extends ConsumerWidget {
+  const PickFromMapButton({Key? key}) : super(key: key);
   @override
-  Widget build(BuildContext context) {
-    final originHasFocus = context.select<SearchPlaceController, bool>(
-      (controller) => controller.originHasFocus,
+  Widget build(BuildContext context, ref) {
+    final originHasFocus = ref.select(
+      searchProvider.select((_) => _.originHasFocus),
     );
     return Padding(
       padding: const EdgeInsets.only(top: 10.0, left: 30.0, right: 20.0),
