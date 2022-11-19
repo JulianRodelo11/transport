@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_meedu/state.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../home_page.dart' show homeProvider;
 
@@ -38,9 +39,8 @@ class MapButtom extends ConsumerWidget {
           ),
           child: IconButton(
             onPressed: controller.goToMyPosition,
-            icon: const Icon(
-              Icons.gps_not_fixed_outlined,
-              color: Colors.black,
+            icon: SvgPicture.asset(
+              'assets/crosshair-3.svg',
             ),
           ),
         ),

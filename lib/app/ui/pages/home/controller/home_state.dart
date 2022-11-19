@@ -1,4 +1,5 @@
 import 'package:app_transport/app/domain/models/place.dart';
+import 'package:app_transport/app/domain/models/route.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 part 'home_state.freezed.dart';
@@ -17,6 +18,7 @@ class HomeState with _$HomeState {
     Place? origin,
     Place? destination,
     PickFromMap? pickFromMap,
+    Route? routes,
   }) = _HomeState;
 
   static HomeState get initialState => const HomeState();

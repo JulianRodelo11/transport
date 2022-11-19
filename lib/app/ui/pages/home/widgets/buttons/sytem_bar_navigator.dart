@@ -1,28 +1,24 @@
-import 'package:app_transport/app/ui/pages/home/controller/home_controller.dart';
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+// import 'package:app_transport/app/home_page.dart';
+// import 'package:app_transport/app/ui/pages/home/home_page.dart';
+// import 'package:flutter/material.dart';
+// import 'package:flutter_meedu/state.dart';
 
-class SystemBarNavigator extends StatelessWidget {
-  const SystemBarNavigator({
-    Key? key,
-  }) : super(key: key);
+// class HomePage extends ConsumerWidget {
+//   const HomePage({
+//     Key? key,
+//   }) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    final hide = context.select<HomeController, bool>((controller) {
-      final state = controller.state;
-      final originAndDestinationReady =
-          state.origin != null && state.destination != null;
-      return originAndDestinationReady ||
-          state.fetching ||
-          state.pickFromMap != null;
-    });
-    if (hide) {
-      return Container();
-    }
-    return Container(
-      height: 55,
-      color: Colors.white,
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context, ref) {
+//     final controller = ref.watch(homeProvider);
+//     final state = controller.state;
+//     final hide = controller.originAndDestinationReady ||
+//         state.fetching ||
+//         state.pickFromMap != null;
+
+//     if (hide) {
+//       return Container();
+//     }
+//     return const SystemBar();
+//   }
+// }

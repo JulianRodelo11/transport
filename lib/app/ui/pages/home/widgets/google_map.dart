@@ -1,3 +1,6 @@
+import 'package:app_transport/app/ui/pages/home/widgets/buttons/map_location_home.dart';
+import 'package:app_transport/app/ui/pages/home/widgets/buttons/menu_bottom.dart';
+
 import '../home_page.dart' show homeProvider;
 import 'package:app_transport/app/ui/pages/home/widgets/buttons/cancel_pick_from_map.dart';
 import 'package:app_transport/app/ui/pages/home/widgets/buttons/location_map_buttom.dart';
@@ -17,7 +20,6 @@ class MapView extends StatefulWidget {
 }
 
 class _MapViewState extends State<MapView> {
-  var padding = EdgeInsets.zero;
   @override
   Widget build(BuildContext context) {
     return Consumer(
@@ -55,8 +57,6 @@ class _MapViewState extends State<MapView> {
                   zoomControlsEnabled: false,
                   compassEnabled: false,
                   rotateGesturesEnabled: false,
-                  scrollGesturesEnabled: true,
-                  zoomGesturesEnabled: true,
                   mapToolbarEnabled: false,
                   onCameraMoveStarted: controller.onCameraMoveStarted,
                   onCameraMove: controller.onCameraMove,
@@ -67,6 +67,8 @@ class _MapViewState extends State<MapView> {
                 const FixedMarker(),
                 const CancelTravel(),
                 const MapButtom(),
+                const MenuBottom(),
+                const MapLocationHome(),
               ],
             ),
           ),

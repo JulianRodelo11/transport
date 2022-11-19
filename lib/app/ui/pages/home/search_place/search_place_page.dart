@@ -56,6 +56,8 @@ class SearchPlacePage extends PageWithArgumentsWidget {
           body: GestureDetector(
             onTap: () => FocusScope.of(context).unfocus(),
             child: SafeArea(
+              top: true,
+              bottom: false,
               child: Column(
                 children: [
                   Stack(

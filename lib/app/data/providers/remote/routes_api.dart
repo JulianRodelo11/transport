@@ -51,7 +51,6 @@ class RoutesAPI {
       );
       return routes.toList();
     } catch (e) {
-      //print(e);
       return null;
     }
   }

@@ -20,7 +20,7 @@ class HomePage extends StatelessWidget {
       body: Column(
         children: [
           SizedBox(
-            height: MediaQuery.of(context).size.height * 0.55,
+            height: MediaQuery.of(context).size.height * 0.6,
             child: Consumer(
               builder: (context, ref, loadingWidget) {
                 // only rebuild if the loading field changes
@@ -40,7 +40,6 @@ class HomePage extends StatelessWidget {
           const WindowOptionsService(),
           const WhereAreYouGoingButton(),
           const BannerFixedMarker(),
-          //const SystemBarNavigator(),
         ],
       ),
     );

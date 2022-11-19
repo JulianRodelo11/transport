@@ -25,6 +25,7 @@ class _$HomeStateTearOff {
       LatLng? initialPosition,
       Place? origin,
       Place? destination,
+      Route? routes,
       PickFromMap? pickFromMap}) {
     return _HomeState(
       loading: loading,
@@ -35,6 +36,7 @@ class _$HomeStateTearOff {
       initialPosition: initialPosition,
       origin: origin,
       destination: destination,
+      routes: routes,
       pickFromMap: pickFromMap,
     );
   }
@@ -53,6 +55,7 @@ mixin _$HomeState {
   LatLng? get initialPosition => throw _privateConstructorUsedError;
   Place? get origin => throw _privateConstructorUsedError;
   Place? get destination => throw _privateConstructorUsedError;
+  Route? get routes => throw _privateConstructorUsedError;
   PickFromMap? get pickFromMap => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -73,6 +76,7 @@ abstract class $HomeStateCopyWith<$Res> {
       LatLng? initialPosition,
       Place? origin,
       Place? destination,
+      Route? routes,
       PickFromMap? pickFromMap});
 
   $PickFromMapCopyWith<$Res>? get pickFromMap;
@@ -96,6 +100,7 @@ class _$HomeStateCopyWithImpl<$Res> implements $HomeStateCopyWith<$Res> {
     Object? initialPosition = freezed,
     Object? origin = freezed,
     Object? destination = freezed,
+    Object? routes = freezed,
     Object? pickFromMap = freezed,
   }) {
     return _then(_value.copyWith(
@@ -131,6 +136,10 @@ class _$HomeStateCopyWithImpl<$Res> implements $HomeStateCopyWith<$Res> {
           ? _value.destination
           : destination // ignore: cast_nullable_to_non_nullable
               as Place?,
+      routes: routes == freezed
+          ? _value.routes
+          : routes // ignore: cast_nullable_to_non_nullable
+              as Route?,
       pickFromMap: pickFromMap == freezed
           ? _value.pickFromMap
           : pickFromMap // ignore: cast_nullable_to_non_nullable
@@ -165,6 +174,7 @@ abstract class _$HomeStateCopyWith<$Res> implements $HomeStateCopyWith<$Res> {
       LatLng? initialPosition,
       Place? origin,
       Place? destination,
+      Route? routes,
       PickFromMap? pickFromMap});
 
   @override
@@ -190,6 +200,7 @@ class __$HomeStateCopyWithImpl<$Res> extends _$HomeStateCopyWithImpl<$Res>
     Object? initialPosition = freezed,
     Object? origin = freezed,
     Object? destination = freezed,
+    Object? routes = freezed,
     Object? pickFromMap = freezed,
   }) {
     return _then(_HomeState(
@@ -225,6 +236,10 @@ class __$HomeStateCopyWithImpl<$Res> extends _$HomeStateCopyWithImpl<$Res>
           ? _value.destination
           : destination // ignore: cast_nullable_to_non_nullable
               as Place?,
+      routes: routes == freezed
+          ? _value.routes
+          : routes // ignore: cast_nullable_to_non_nullable
+              as Route?,
       pickFromMap: pickFromMap == freezed
           ? _value.pickFromMap
           : pickFromMap // ignore: cast_nullable_to_non_nullable
@@ -245,6 +260,7 @@ class _$_HomeState extends _HomeState {
       this.initialPosition,
       this.origin,
       this.destination,
+      this.routes,
       this.pickFromMap})
       : super._();
 
@@ -270,11 +286,13 @@ class _$_HomeState extends _HomeState {
   @override
   final Place? destination;
   @override
+  final Route? routes;
+  @override
   final PickFromMap? pickFromMap;
 
   @override
   String toString() {
-    return 'HomeState(loading: $loading, gpsEnabled: $gpsEnabled, fetching: $fetching, markers: $markers, polylines: $polylines, initialPosition: $initialPosition, origin: $origin, destination: $destination, pickFromMap: $pickFromMap)';
+    return 'HomeState(loading: $loading, gpsEnabled: $gpsEnabled, fetching: $fetching, markers: $markers, polylines: $polylines, initialPosition: $initialPosition, origin: $origin, destination: $destination,routes: $routes, pickFromMap: $pickFromMap)';
   }
 
   @override
@@ -304,6 +322,8 @@ class _$_HomeState extends _HomeState {
             (identical(other.destination, destination) ||
                 const DeepCollectionEquality()
                     .equals(other.destination, destination)) &&
+            (identical(other.routes, routes) ||
+                const DeepCollectionEquality().equals(other.routes, routes)) &&
             (identical(other.pickFromMap, pickFromMap) ||
                 const DeepCollectionEquality()
                     .equals(other.pickFromMap, pickFromMap)));
@@ -320,6 +340,7 @@ class _$_HomeState extends _HomeState {
       const DeepCollectionEquality().hash(initialPosition) ^
       const DeepCollectionEquality().hash(origin) ^
       const DeepCollectionEquality().hash(destination) ^
+      const DeepCollectionEquality().hash(routes) ^
       const DeepCollectionEquality().hash(pickFromMap);
 
   @JsonKey(ignore: true)
@@ -338,6 +359,7 @@ abstract class _HomeState extends HomeState {
       LatLng? initialPosition,
       Place? origin,
       Place? destination,
+      Route? routes,
       PickFromMap? pickFromMap}) = _$_HomeState;
   const _HomeState._() : super._();
 
@@ -357,6 +379,8 @@ abstract class _HomeState extends HomeState {
   Place? get origin => throw _privateConstructorUsedError;
   @override
   Place? get destination => throw _privateConstructorUsedError;
+  @override
+  Route? get routes => throw _privateConstructorUsedError;
   @override
   PickFromMap? get pickFromMap => throw _privateConstructorUsedError;
   @override

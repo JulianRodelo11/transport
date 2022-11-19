@@ -11,8 +11,8 @@ void main() {
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
     systemNavigationBarColor: Colors.white, // Navigation bar
     systemNavigationBarIconBrightness: Brightness.dark,
-    statusBarColor: Colors.white, // Status bar
-    statusBarIconBrightness: Brightness.dark,
+    statusBarColor: Colors.black, // Status bar
+    statusBarIconBrightness: Brightness.light,
   ));
   runApp(MyApp());
 }
@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.grey,
       ),
       debugShowCheckedModeBanner: false,
       initialRoute: Routes.SPLASH,

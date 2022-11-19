@@ -120,7 +120,7 @@ class HomeController extends StateNotifier<HomeState> {
     }
   }
 
-  void confirmOriginOrDestination() {
+  Future<void> confirmOriginOrDestination() async {
     state = state.confirmOriginOrDestination();
     if (originAndDestinationReady) {
       setOriginAndDestination(
@@ -128,6 +128,13 @@ class HomeController extends StateNotifier<HomeState> {
         state.destination!,
       );
     }
+    // goToSearch();
+    // final zoom = await _mapController!.getZoomLevel();
+    // final cameraUpdate = CameraUpdate.newLatLngZoom(
+    //   CurrentPosition.i.value!,
+    //   zoom < 15.9 ? 15.9 : zoom,
+    // );
+    // return _mapController!.animateCamera(cameraUpdate);
   }
 
   Future<void> exchange() async {

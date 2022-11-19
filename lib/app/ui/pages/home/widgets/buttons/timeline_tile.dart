@@ -45,7 +45,7 @@ class TimeLineTile extends StatelessWidget {
     return Positioned(
       top: 70,
       child: Container(
-        width: 245,
+        width: 260,
         height: 45,
         decoration: BoxDecoration(
           color: Colors.white,
@@ -72,6 +72,7 @@ class TimeLineTile extends StatelessWidget {
                     overflow: TextOverflow.ellipsis,
                     style: const TextStyle(
                       color: Colors.black,
+                      fontWeight: FontWeight.w500,
                       fontSize: 13,
                     ),
                   ),
@@ -94,6 +95,7 @@ class TimeLineTile extends StatelessWidget {
                     overflow: TextOverflow.ellipsis,
                     style: const TextStyle(
                       color: Colors.black,
+                      fontWeight: FontWeight.w500,
                       fontSize: 13,
                     ),
                   ),

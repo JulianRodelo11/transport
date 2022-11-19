@@ -11,8 +11,8 @@ void goToSearch([bool hasOriginFocus = true]) async {
 
   final response = await router.push<SearchResponse>(
     const SearchPlacePage(),
-    transition: router.Transition.rightToLeft,
-    transitionDuration: const Duration(milliseconds: 300),
+    transition: router.Transition.downToUp,
+    transitionDuration: const Duration(milliseconds: 10),
     arguments: SearchPlaceArguments(
       initialOrigin: state.origin,
       initialDestination: state.destination,

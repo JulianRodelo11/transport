@@ -37,7 +37,7 @@ class CancelPickFromMap extends ConsumerWidget {
           child: IconButton(
             onPressed: homeProvider.read.cancelPickFromMap,
             icon: SvgPicture.asset(
-              'assets/x.svg',
+              'assets/x-2.svg',
             ),
           ),
         ),

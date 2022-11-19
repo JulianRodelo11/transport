@@ -86,7 +86,10 @@ class _SearchInputState extends State<SearchInput> {
               Radius.circular(10),
             ),
           ),
-          style: const TextStyle(fontSize: 15),
+          style: const TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.w400,
+          ),
           cursorColor: Colors.black87,
         ),
       ),

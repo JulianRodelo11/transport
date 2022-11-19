@@ -27,97 +27,96 @@ class BannerFixedMarker extends ConsumerWidget {
     return Expanded(
       child: Scaffold(
         backgroundColor: Colors.white,
-        body: SafeArea(
-          top: false,
-          child: Stack(
-            children: [
-              ListView(
-                children: [
-                  Container(
-                    color: Colors.white,
-                    child: Column(
-                      children: [
-                        Text(
-                          'Establecer punto de ${pickFromMap.isOrigin ? 'partida' : 'destino'}',
-                          style: kPoppinsMedium.copyWith(
-                            fontSize: 16,
-                          ),
+        body: Stack(
+          children: [
+            ListView(
+              padding: const EdgeInsets.only(
+                top: 20.0,
+              ),
+              children: [
+                Container(
+                  color: Colors.white,
+                  child: Column(
+                    children: [
+                      Text(
+                        'Establecer punto de ${pickFromMap.isOrigin ? 'partida' : 'destino'}',
+                        style: kPoppinsSemibold.copyWith(
+                          fontSize: 16,
                         ),
-                        Padding(
-                          padding: const EdgeInsets.only(
-                              top: 20.0, left: 20, right: 20, bottom: 20),
-                          child: CupertinoButton(
-                            onPressed: (() {}),
-                            padding: EdgeInsets.zero,
-                            child: Container(
-                              width: double.infinity,
-                              padding: const EdgeInsets.all(15),
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(10),
-                                boxShadow: const [
-                                  BoxShadow(
-                                    color: Colors.black12,
-                                    blurRadius: 8,
-                                    offset: Offset(0, 2),
-                                  ),
-                                ],
-                              ),
-                              child: Row(
-                                children: [
-                                  SvgPicture.asset(
-                                    'assets/search-2.svg',
-                                  ),
-                                  const SizedBox(
-                                    width: 20,
-                                  ),
-                                  place != null && !dragging
-                                      ? Expanded(
-                                          child: Text(
-                                            pickFromMap.place!.title,
-                                            style: const TextStyle(
-                                              color: Colors.black54,
-                                              fontSize: 15,
-                                            ),
-                                            maxLines: 1,
-                                            overflow: TextOverflow.ellipsis,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(
+                            top: 20.0, left: 20, right: 20, bottom: 20),
+                        child: CupertinoButton(
+                          onPressed: (() {}),
+                          padding: EdgeInsets.zero,
+                          child: Container(
+                            width: double.infinity,
+                            padding: const EdgeInsets.all(15),
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(10),
+                              boxShadow: const [
+                                BoxShadow(
+                                  color: Colors.black12,
+                                  blurRadius: 8,
+                                  offset: Offset(0, 2),
+                                ),
+                              ],
+                            ),
+                            child: Row(
+                              children: [
+                                SvgPicture.asset(
+                                  'assets/search-2.svg',
+                                ),
+                                const SizedBox(
+                                  width: 20,
+                                ),
+                                place != null && !dragging
+                                    ? Expanded(
+                                        child: Text(
+                                          pickFromMap.place!.title,
+                                          style: const TextStyle(
+                                            color: Colors.black54,
+                                            fontSize: 15,
                                           ),
-                                        )
-                                      : dragging
-                                          ? const Text('')
-                                          : const Text(''),
-                                ],
-                              ),
+                                          maxLines: 1,
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
+                                      )
+                                    : dragging
+                                        ? const Text('')
+                                        : const Text(''),
+                              ],
                             ),
                           ),
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
-                ],
-              ),
-              Positioned(
-                bottom: 20,
-                right: 20,
-                child: FloatingActionButton(
-                  onPressed: pickFromMap.place != null
-                      ? controller.confirmOriginOrDestination
-                      // () => goToSearch()
-                      : null,
-                  elevation: 0,
-                  backgroundColor: pickFromMap.place != null
-                      ? const Color(0xFF1ed760)
-                      : const Color(0xFFe8ece4),
-                  child: pickFromMap.place != null
-                      ? const Icon(CupertinoIcons.arrow_right)
-                      : const Icon(
-                          CupertinoIcons.arrow_right,
-                          color: Colors.grey,
-                        ),
                 ),
+              ],
+            ),
+            Positioned(
+              bottom: 20,
+              right: 20,
+              child: FloatingActionButton(
+                onPressed: pickFromMap.place != null
+                    ? controller.confirmOriginOrDestination
+                    : null,
+                elevation: 0,
+                backgroundColor: pickFromMap.place != null
+                    ? const Color(0xFF1ed760)
+                    : const Color(0xFFe8ece4),
+                child: pickFromMap.place != null
+                    ? const Icon(CupertinoIcons.arrow_right)
+                    : const Icon(
+                        CupertinoIcons.arrow_right,
+                        color: Colors.grey,
+                      ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
