@@ -21,10 +21,11 @@ Future<HomeState> setRouteAndMarkers({
 
   final route = routes.first;
 
-  final originIcon = await placeToMarker(origin, null);
+  final originIcon = await placeToMarker(origin, null, null);
   final destinationIcon = await placeToMarker(
     destination,
     route.duration,
+    route.length,
   );
 
   final originMarker = Marker(

@@ -82,7 +82,7 @@ class WhereAreYouGoingButton extends ConsumerWidget {
                                       style: TextStyle(
                                         color: Color(0xFF4B4C4C),
                                         fontSize: 19,
-                                        fontWeight: FontWeight.w500,
+                                        fontWeight: FontWeight.w600,
                                       ),
                                       maxLines: 1,
                                     ),
@@ -118,7 +118,7 @@ class WhereAreYouGoingButton extends ConsumerWidget {
                                                     style: kPoppinsSemibold
                                                         .copyWith(
                                                       color: Colors.white,
-                                                      fontSize: 13,
+                                                      fontSize: 14,
                                                     ),
                                                     maxLines: 1,
                                                     overflow:
@@ -150,7 +150,7 @@ class WhereAreYouGoingButton extends ConsumerWidget {
                           right: 20.0,
                         ),
                         child: Container(
-                          height: 100,
+                          height: 120,
                           width: double.infinity,
                           decoration: BoxDecoration(
                             color: Colors.white,

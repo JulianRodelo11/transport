@@ -17,8 +17,8 @@ class HomeState with _$HomeState {
     LatLng? initialPosition,
     Place? origin,
     Place? destination,
-    PickFromMap? pickFromMap,
     Route? routes,
+    PickFromMap? pickFromMap,
   }) = _HomeState;
 
   static HomeState get initialState => const HomeState();
@@ -33,6 +33,7 @@ class HomeState with _$HomeState {
       polylines: {},
       initialPosition: initialPosition,
       origin: null,
+      routes: null,
       destination: null,
     );
   }
@@ -44,6 +45,7 @@ class HomeState with _$HomeState {
         isOrigin: isOrigin,
         origin: origin,
         destination: destination,
+        routes: routes,
         markers: markers,
         polylines: polylines,
         dragging: false,
@@ -52,6 +54,7 @@ class HomeState with _$HomeState {
       polylines: {},
       origin: null,
       destination: null,
+      routes: null,
       loading: loading,
       fetching: fetching,
       gpsEnabled: gpsEnabled,
@@ -71,6 +74,7 @@ class HomeState with _$HomeState {
       initialPosition: initialPosition,
       origin: prevData.origin,
       destination: prevData.destination,
+      routes: prevData.routes,
     );
   }
 
@@ -85,6 +89,7 @@ class HomeState with _$HomeState {
       initialPosition: initialPosition,
       origin: data.isOrigin ? data.place : data.origin,
       destination: !data.isOrigin ? data.place : data.destination,
+      routes: routes,
       fetching: fetching,
       pickFromMap: null,
     );
@@ -98,6 +103,7 @@ class PickFromMap with _$PickFromMap {
     Place? place,
     Place? origin,
     Place? destination,
+    Route? routes,
     required bool isOrigin,
     required bool dragging,
     required Map<MarkerId, Marker> markers,

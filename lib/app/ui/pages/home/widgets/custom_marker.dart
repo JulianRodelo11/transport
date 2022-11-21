@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 class MyCustomMarker extends CustomPainter {
   final String label;
   final int? duration;
+  final int? length;
 
   MyCustomMarker({
     required this.label,
     required this.duration,
+    required this.length,
   });
 
   // void _drawText({

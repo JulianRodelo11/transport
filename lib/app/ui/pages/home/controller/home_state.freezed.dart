@@ -397,6 +397,7 @@ class _$PickFromMapTearOff {
       {Place? place,
       Place? origin,
       Place? destination,
+      Route? routes,
       required bool isOrigin,
       required bool dragging,
       required Map<MarkerId, Marker> markers,
@@ -405,6 +406,7 @@ class _$PickFromMapTearOff {
       place: place,
       origin: origin,
       destination: destination,
+      routes: routes,
       isOrigin: isOrigin,
       dragging: dragging,
       markers: markers,
@@ -421,6 +423,7 @@ mixin _$PickFromMap {
   Place? get place => throw _privateConstructorUsedError;
   Place? get origin => throw _privateConstructorUsedError;
   Place? get destination => throw _privateConstructorUsedError;
+  Route? get routes => throw _privateConstructorUsedError;
   bool get isOrigin => throw _privateConstructorUsedError;
   bool get dragging => throw _privateConstructorUsedError;
   Map<MarkerId, Marker> get markers => throw _privateConstructorUsedError;
@@ -440,6 +443,7 @@ abstract class $PickFromMapCopyWith<$Res> {
       {Place? place,
       Place? origin,
       Place? destination,
+      Route? routes,
       bool isOrigin,
       bool dragging,
       Map<MarkerId, Marker> markers,
@@ -459,6 +463,7 @@ class _$PickFromMapCopyWithImpl<$Res> implements $PickFromMapCopyWith<$Res> {
     Object? place = freezed,
     Object? origin = freezed,
     Object? destination = freezed,
+    Object? routes = freezed,
     Object? isOrigin = freezed,
     Object? dragging = freezed,
     Object? markers = freezed,
@@ -477,6 +482,10 @@ class _$PickFromMapCopyWithImpl<$Res> implements $PickFromMapCopyWith<$Res> {
           ? _value.destination
           : destination // ignore: cast_nullable_to_non_nullable
               as Place?,
+      routes: routes == freezed
+          ? _value.routes
+          : routes // ignore: cast_nullable_to_non_nullable
+              as Route?,
       isOrigin: isOrigin == freezed
           ? _value.isOrigin
           : isOrigin // ignore: cast_nullable_to_non_nullable
@@ -508,6 +517,7 @@ abstract class _$PickFromMapCopyWith<$Res>
       {Place? place,
       Place? origin,
       Place? destination,
+      Route? routes,
       bool isOrigin,
       bool dragging,
       Map<MarkerId, Marker> markers,
@@ -529,6 +539,7 @@ class __$PickFromMapCopyWithImpl<$Res> extends _$PickFromMapCopyWithImpl<$Res>
     Object? place = freezed,
     Object? origin = freezed,
     Object? destination = freezed,
+    Object? routes = freezed,
     Object? isOrigin = freezed,
     Object? dragging = freezed,
     Object? markers = freezed,
@@ -547,6 +558,10 @@ class __$PickFromMapCopyWithImpl<$Res> extends _$PickFromMapCopyWithImpl<$Res>
           ? _value.destination
           : destination // ignore: cast_nullable_to_non_nullable
               as Place?,
+      routes: routes == freezed
+          ? _value.routes
+          : routes // ignore: cast_nullable_to_non_nullable
+              as Route?,
       isOrigin: isOrigin == freezed
           ? _value.isOrigin
           : isOrigin // ignore: cast_nullable_to_non_nullable
@@ -574,6 +589,7 @@ class _$_PickFromMap extends _PickFromMap {
       {this.place,
       this.origin,
       this.destination,
+      this.routes,
       required this.isOrigin,
       required this.dragging,
       required this.markers,
@@ -587,6 +603,8 @@ class _$_PickFromMap extends _PickFromMap {
   @override
   final Place? destination;
   @override
+  final Route? routes;
+  @override
   final bool isOrigin;
   @override
   final bool dragging;
@@ -597,7 +615,7 @@ class _$_PickFromMap extends _PickFromMap {
 
   @override
   String toString() {
-    return 'PickFromMap(place: $place, origin: $origin, destination: $destination, isOrigin: $isOrigin, dragging: $dragging, markers: $markers, polylines: $polylines)';
+    return 'PickFromMap(place: $place, origin: $origin, destination: $destination, routes: $routes, isOrigin: $isOrigin, dragging: $dragging, markers: $markers, polylines: $polylines)';
   }
 
   @override
@@ -611,6 +629,8 @@ class _$_PickFromMap extends _PickFromMap {
             (identical(other.destination, destination) ||
                 const DeepCollectionEquality()
                     .equals(other.destination, destination)) &&
+            (identical(other.routes, routes) ||
+                const DeepCollectionEquality().equals(other.routes, routes)) &&
             (identical(other.isOrigin, isOrigin) ||
                 const DeepCollectionEquality()
                     .equals(other.isOrigin, isOrigin)) &&
@@ -631,6 +651,7 @@ class _$_PickFromMap extends _PickFromMap {
       const DeepCollectionEquality().hash(place) ^
       const DeepCollectionEquality().hash(origin) ^
       const DeepCollectionEquality().hash(destination) ^
+      const DeepCollectionEquality().hash(routes) ^
       const DeepCollectionEquality().hash(isOrigin) ^
       const DeepCollectionEquality().hash(dragging) ^
       const DeepCollectionEquality().hash(markers) ^
@@ -647,6 +668,7 @@ abstract class _PickFromMap extends PickFromMap {
       {Place? place,
       Place? origin,
       Place? destination,
+      Route? routes,
       required bool isOrigin,
       required bool dragging,
       required Map<MarkerId, Marker> markers,
@@ -659,6 +681,8 @@ abstract class _PickFromMap extends PickFromMap {
   Place? get origin => throw _privateConstructorUsedError;
   @override
   Place? get destination => throw _privateConstructorUsedError;
+  @override
+  Route? get routes => throw _privateConstructorUsedError;
   @override
   bool get isOrigin => throw _privateConstructorUsedError;
   @override

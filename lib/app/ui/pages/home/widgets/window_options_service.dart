@@ -15,8 +15,8 @@ class WindowOptionsService extends ConsumerWidget {
         return state.origin != null && state.destination != null;
       }),
     );
-    final time = controller.state.routes?.duration;
-    final distance = controller.state.routes?.length;
+    //final time = controller.state.routes?.duration;
+    //final distance = controller.state.routes?.length;
 
     if (!controller.originAndDestinationReady) {
       return Container();
@@ -164,120 +164,124 @@ class WindowOptionsService extends ConsumerWidget {
                           ),
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(
-                          left: 20.0,
-                          right: 20.0,
-                        ),
-                        child: Container(
-                          height: 80,
-                          width: double.infinity,
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(10),
-                            boxShadow: const [
-                              BoxShadow(
-                                color: Colors.black12,
-                                blurRadius: 8,
-                                offset: Offset(0, 1),
-                              ),
-                            ],
+                      GestureDetector(
+                        onTap: () {},
+                        child: Padding(
+                          padding: const EdgeInsets.only(
+                            left: 20.0,
+                            right: 20.0,
                           ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Center(
-                                child: SizedBox(
-                                  height: 47,
-                                  width: 87,
-                                  child: Image.asset('assets/UberX-3.png'),
+                          child: Container(
+                            height: 80,
+                            width: double.infinity,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(10),
+                              boxShadow: const [
+                                BoxShadow(
+                                  color: Colors.black12,
+                                  blurRadius: 8,
+                                  offset: Offset(0, 1),
                                 ),
-                              ),
-                              Expanded(
-                                child: Column(
-                                  children: [
-                                    Expanded(
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.end,
-                                        children: const [
-                                          Padding(
-                                            padding: EdgeInsets.only(
-                                              left: 5.0,
-                                              bottom: 2.0,
-                                            ),
-                                            child: Text(
-                                              'Premium',
-                                              style: TextStyle(
-                                                color: Colors.black87,
-                                                fontSize: 18,
-                                                fontWeight: FontWeight.w700,
-                                              ),
-                                            ),
-                                          ),
-                                          Padding(
-                                            padding: EdgeInsets.only(
-                                              right: 10.0,
-                                              bottom: 2,
-                                            ),
-                                            child: Text(
-                                              'COP 18.000',
-                                              style: TextStyle(
-                                                color: Colors.black87,
-                                                fontSize: 17,
-                                                fontWeight: FontWeight.w700,
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    Expanded(
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          const Padding(
-                                            padding: EdgeInsets.only(
-                                              left: 5.0,
-                                              top: 3,
-                                            ),
-                                            child: Text(
-                                              '---',
-                                              //distanceFormat(destination),
-                                              style: TextStyle(
-                                                color: Colors.black54,
-                                                fontSize: 13.5,
-                                                fontWeight: FontWeight.w500,
-                                              ),
-                                            ),
-                                          ),
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                              right: 10.0,
-                                              top: 3.0,
-                                            ),
-                                            child: Text(
-                                              time.toString(),
-                                              style: const TextStyle(
-                                                color: Colors.black54,
-                                                fontSize: 13.5,
-                                                fontWeight: FontWeight.w500,
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ],
+                              ],
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Center(
+                                  child: SizedBox(
+                                    height: 47,
+                                    width: 87,
+                                    child: Image.asset('assets/UberX-3.png'),
+                                  ),
                                 ),
-                              ),
-                            ],
+                                Expanded(
+                                  child: Column(
+                                    children: [
+                                      Expanded(
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.end,
+                                          children: const [
+                                            Padding(
+                                              padding: EdgeInsets.only(
+                                                left: 5.0,
+                                                bottom: 2.0,
+                                              ),
+                                              child: Text(
+                                                'Premium',
+                                                style: TextStyle(
+                                                  color: Colors.black87,
+                                                  fontSize: 18,
+                                                  fontWeight: FontWeight.w700,
+                                                ),
+                                              ),
+                                            ),
+                                            Padding(
+                                              padding: EdgeInsets.only(
+                                                right: 10.0,
+                                                bottom: 2,
+                                              ),
+                                              child: Text(
+                                                'COP 18.000',
+                                                style: TextStyle(
+                                                  color: Colors.black87,
+                                                  fontSize: 17,
+                                                  fontWeight: FontWeight.w700,
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      Expanded(
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: const [
+                                            Padding(
+                                              padding: EdgeInsets.only(
+                                                left: 5.0,
+                                                top: 3,
+                                              ),
+                                              child: Text(
+                                                '---',
+                                                //distanceFormat(destination),
+                                                style: TextStyle(
+                                                  color: Colors.black54,
+                                                  fontSize: 13.5,
+                                                  fontWeight: FontWeight.w500,
+                                                ),
+                                              ),
+                                            ),
+                                            Padding(
+                                              padding: EdgeInsets.only(
+                                                right: 10.0,
+                                                top: 3.0,
+                                              ),
+                                              child: Text(
+                                                '---',
+                                                // time.toString(),
+                                                style: TextStyle(
+                                                  color: Colors.black54,
+                                                  fontSize: 13.5,
+                                                  fontWeight: FontWeight.w500,
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ),

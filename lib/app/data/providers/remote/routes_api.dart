@@ -21,7 +21,6 @@ class RoutesAPI {
           "origin": "${origin.latitude},${origin.longitude}",
           "destination": "${destination.latitude},${destination.longitude}",
           "transportMode": "car",
-          "alternatives": 3,
           "return": "polyline,summary,instructions,actions",
         },
       );
@@ -49,6 +48,7 @@ class RoutesAPI {
           );
         },
       );
+
       return routes.toList();
     } catch (e) {
       return null;
